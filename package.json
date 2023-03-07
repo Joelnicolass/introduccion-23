@@ -2,9 +2,9 @@
   "name": "ejercicios",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start:nivelatorio": "npm run test",
+    "start:conceptos": "nodemon ./src/basico/conceptos.js",
     "test": "jest --watchAll"
   },
   "author": "",

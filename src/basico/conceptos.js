@@ -201,8 +201,34 @@ const saludar = (nombre) => `Hola ${nombre}`;
 
 //---------------------------------------------------------
 
+// FUNCIONES FLECHA
+
+/*  
+    function fn(a, b) {
+      return a + b;
+    }
+
+    const fn = (a, b) => {
+      return a + b;
+    }
+
+    const fn = (a, b) => a + b;
+
+    const fn = a => a;
+*/
+
+/* const obj = {
+  nombre: "Nico",
+  saludar: function () {
+    console.log(this.nombre);
+  },
+};
+
+obj.saludar(); */
+
+/////////////////////////////////////////////////////////
+
 // DOM
+// virtual DOM
 
 // shadow DOM
-
-// virtual DOM
