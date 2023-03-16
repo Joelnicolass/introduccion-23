@@ -12,24 +12,20 @@
 */
 
 // debe sumar dos numeros
-function sumar(a, b) {
-  return a + b;
-}
+const sumar = (a, b) => a + b;
 
 // debe restar dos numeros
 // debe comprobar que los parametros sean anviados, de lo contrario debe retotnar inmediatamente
-function restar(a, b) {
-  if (!a || !b) {
-    return;
-  }
+const restar = (a, b) => {
+	if (!a || !b) {
+		return;
+	}
 
-  return a - b;
-}
+	return a - b;
+};
 
 // debe retornar "Hola {nombre}" donde nombre corresponde al argumento enviado.
-function saludar(nombre) {
-  return "Hola " + nombre;
-}
+const saludar = (nombre) => 'Hola ' + nombre;
 
 /* 
   TODO: ARREGLAR FUNCIONES Y PASARLAS A FUNCIONES FLECHA
@@ -42,9 +38,7 @@ function saludar(nombre) {
 // dede retornar un entero igual a la cantidad de argumentos que recibe
 // Ejemplo: una funcion que reciba cuatro argumentos debe retornar 4 -> fn(a,b,c,d) => 4
 
-function contarArgs() {
-  return args;
-}
+const contarArgs = (...args) => args.length;
 
 // La siguiente funcion debe retornar un objeto igual al que recibe, pero con una propiedad extra
 // la propiedad extra debe ser clave: completado, valor: true
@@ -61,7 +55,10 @@ function contarArgs() {
 
 */
 
-function copiaObjetos(objeto) {}
+const copiaObjetos = (objeto) => ({
+	...objeto,
+	completado: true
+});
 
 // La siguiente funcion debe cambiar la propiedad de un objeto, para esto debera:
 // recibir como argumento: un objeto - el nombre de la clave que se quiere modificar - el valor que se quiere asignar a la clave
@@ -86,7 +83,10 @@ function copiaObjetos(objeto) {}
   *Pudiendo luego asignar directamente el nuevo valor, como si de un setter se tratase: auto['color'] = 'rojo'
 */
 
-function cambiaValorObjeto(objeto, clave, valor) {}
+const cambiaValorObjeto = (objeto, clave, valor) => {
+	objeto[clave] = valor;
+	return objeto;
+};
 
 // TODO: EJERCICIO 2 - DESESTRUCTURACION
 // TODO: RESOLVER LOS SIGUIENTES EJERCICIOS CON DESESTRUCTURACION
@@ -98,43 +98,49 @@ function cambiaValorObjeto(objeto, clave, valor) {}
 // *Al finalizar el ejercicio el test debera estar en 'passed'
 
 function desestructuracion1() {
-  const persona = {
-    id: "0000000001",
-    nombre: "Juan",
-    apellido: "Varela",
-    email: "juanva@email.com",
-    direccion: {
-      calle: "Av. Falsa",
-      otros: {
-        numero: 31,
-        entreCalles: ["Noexiste", "Tampocoexiste"],
-      },
-    },
-  };
+	const persona = {
+		id: '0000000001',
+		nombre: 'Juan',
+		apellido: 'Varela',
+		email: 'juanva@email.com',
+		direccion: {
+			calle: 'Av. Falsa',
+			otros: {
+				numero: 31,
+				entreCalles: ['Noexiste', 'Tampocoexiste']
+			}
+		}
+	};
 
-  return {
-    id,
-    nombre,
-    numero,
-    entreCalles: {
-      calle1,
-      calle2,
-    },
-  };
+	const { id, nombre, direccion } = persona;
+	const { numero, entreCalles } = direccion.otros;
+	const [calle1, calle2] = entreCalles;
+
+	return {
+		id,
+		nombre,
+		numero,
+		entreCalles: {
+			calle1,
+			calle2
+		}
+	};
 }
 
 // Resolver con desestructuracion por posicion
 //! NO CAMBIAR LOS VALORES DEL ARRAY DE NOMBRES
 
 function desestructuracion2() {
-  const nombres = ["Clemente", "Veronica", "Juan", "Daniela"];
+	const nombres = ['Clemente', 'Veronica', 'Juan', 'Daniela'];
 
-  return {
-    nombre1,
-    nombre2,
-    nombre3,
-    nombre4,
-  };
+	const [nombre1, nombre2, nombre3, nombre4] = nombres;
+
+	return {
+		nombre1,
+		nombre2,
+		nombre3,
+		nombre4
+	};
 }
 
 /* 
@@ -153,19 +159,40 @@ function desestructuracion2() {
 // *AYUDA: Para resolver este ejercicio puede crear funciones y objetos adicionales.
 // *Por ejemplo constantes con las jugadas, funciones de evaluacion, o lo que considere necesario
 
+// * piedra gana a tijera
+// * papel gana a piedra
+// * tijera gana a papel
+
 function piedraPapelTijera(jugada1, jugada2) {
-  return "Gana el jugador 1";
+	jugada1 = jugada1.toLowerCase();
+	jugada2 = jugada2.toLowerCase();
+
+	const aux = {
+		piedra: 'tijera',
+		papel: 'piedra',
+		tijera: 'papel'
+	};
+
+	if (!aux[jugada1] || !aux[jugada2]) {
+		return 'Jugada invalida';
+	}
+
+	if (jugada1 === jugada2) {
+		return 'Empate';
+	}
+
+	return aux[jugada1] === jugada2 ? 'Gana el jugador 1' : 'Gana el jugador 2';
 }
 
 // NO MODIFICAR
 module.exports = {
-  sumar,
-  restar,
-  saludar,
-  contarArgs,
-  copiaObjetos,
-  cambiaValorObjeto,
-  desestructuracion1,
-  desestructuracion2,
-  piedraPapelTijera,
+	sumar,
+	restar,
+	saludar,
+	contarArgs,
+	copiaObjetos,
+	cambiaValorObjeto,
+	desestructuracion1,
+	desestructuracion2,
+	piedraPapelTijera
 };
